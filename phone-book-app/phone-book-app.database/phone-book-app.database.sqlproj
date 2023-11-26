@@ -63,6 +63,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Label.sql" />
     <Build Include="dbo\Tables\Contact.sql" />
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostScripts\Populate.sql">

@@ -1,4 +1,9 @@
-﻿IF NOT EXISTS (SELECT 1 FROM [dbo].[Label] WHERE [Name] IN ('Family', 'Colleague'))
+﻿IF NOT EXISTS (SELECT 1 FROM [dbo].[__EFMigrationsHistory] WHERE [MigrationId] IN ('20231126053337_CreateLabelSchema'))
+    BEGIN
+        INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20231126053337_CreateLabelSchema', N'8.0.0')
+        INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20231126053626_CreateContactSchema', N'8.0.0')
+    END
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Label] WHERE [Name] IN ('Family', 'Colleague'))
     BEGIN
         
         SET IDENTITY_INSERT [dbo].[Label] ON 
