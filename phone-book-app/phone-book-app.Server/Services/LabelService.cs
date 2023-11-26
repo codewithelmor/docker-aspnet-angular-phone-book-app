@@ -42,15 +42,17 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var existingLabel = await _context.Labels.AsNoTracking().FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+                var existingLabel = await _context.Labels.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
                 if (existingLabel != null)
                 {
                     return existingLabel;
                 }
-
-                var newLabel = await _context.Labels.AddAsync(new Label { Name = name, IsActive = true });
-                await _context.SaveChangesAsync();
-                return newLabel.Entity;
+                else
+                {
+                    var newLabel = await _context.Labels.AddAsync(new Label { Name = name, IsActive = true });
+                    await _context.SaveChangesAsync();
+                    return newLabel.Entity;
+                }
             }
             catch (Exception)
             {

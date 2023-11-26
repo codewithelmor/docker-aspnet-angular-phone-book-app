@@ -51,6 +51,7 @@ namespace phone_book_app.Server.Services
                 contact.FamilyName = model.FamilyName;
                 contact.MobileNumber = model.MobileNumber;
                 contact.IsActive = true;
+                contact.LabelId = label.Id;
                 contact.Label = label;
                 if (!string.IsNullOrWhiteSpace(model.BirthDate))
                 {
@@ -79,6 +80,7 @@ namespace phone_book_app.Server.Services
                     contact.FamilyName = model.FamilyName;
                     contact.MobileNumber = model.MobileNumber;
                     var label = await _labelService.CreateLabelIfExisting(model.Label);
+                    contact.LabelId = label.Id;
                     contact.Label = label;
                     if (!string.IsNullOrWhiteSpace(model.BirthDate))
                     {
