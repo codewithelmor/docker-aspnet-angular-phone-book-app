@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Models;
 using phone_book_app.Server.ViewModels;
 
@@ -19,6 +20,8 @@ namespace phone_book_app.Server.Mappings
                         Value = src.Label.Id.ToString(),
                         Disabled = src.Label.IsActive
                     }));
+
+            CreateMap<ContactInputModel, Contact>();
         }
     }
 }
