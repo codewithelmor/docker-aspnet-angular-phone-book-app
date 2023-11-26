@@ -48,7 +48,7 @@ namespace phone_book_app.Server.Services
                     return existingLabel;
                 }
 
-                var newLabel = await _context.Labels.AddAsync(new Label { Name = name });
+                var newLabel = await _context.Labels.AddAsync(new Label { Name = name, IsActive = true });
                 await _context.SaveChangesAsync();
                 return newLabel.Entity;
             }

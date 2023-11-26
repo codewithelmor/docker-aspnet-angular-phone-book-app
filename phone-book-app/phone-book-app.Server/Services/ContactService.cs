@@ -46,7 +46,11 @@ namespace phone_book_app.Server.Services
             try
             {
                 var label = await _labelService.CreateLabelIfExisting(model.Label);
-                var contact = _mapper.Map<Contact>(model);
+                var contact = new Contact();
+                contact.GivenName = model.GivenName;
+                contact.FamilyName = model.FamilyName;
+                contact.MobileNumber = model.MobileNumber;
+                contact.IsActive = true;
                 contact.Label = label;
                 if (!string.IsNullOrWhiteSpace(model.BirthDate))
                 {

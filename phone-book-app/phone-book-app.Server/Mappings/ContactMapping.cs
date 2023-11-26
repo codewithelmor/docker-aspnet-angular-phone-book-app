@@ -20,8 +20,6 @@ namespace phone_book_app.Server.Mappings
                         Value = src.Label.Id.ToString(),
                         Disabled = src.Label.IsActive
                     }));
-
-            CreateMap<ContactInputModel, Contact>();
         }
     }
 }
