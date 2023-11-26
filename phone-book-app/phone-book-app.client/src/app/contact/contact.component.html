@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 id="tableLabel">Contacts</h1>
+
+            <p>This component demonstrates fetching data from the server.</p>
+            
+            <p *ngIf="!contact$"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+
+            <div *ngIf="label$">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <ng-container *ngFor="let label of label$ | async">
+                        <button [id]="label.value" class="btn" [ngClass]="{'btn-primary': label.value === selectedLabel , 'btn-outline-primary' : label.value !== selectedLabel }" type="button" (click)="onClickLabel(label.value)">{{ label.text }}</button>
+                    </ng-container>
+                    <button class="btn me-md-2" [ngClass]="{'btn-primary': '' === selectedLabel , 'btn-outline-primary' : '' !== selectedLabel }" type="button" (click)="onClickLabel('')">All</button>
+                </div>
+            </div>
+
+            <p class="pt-3">
+                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add Contact</button>
+            </p>            
+            
+            <table class="table table-sm table-hover table-border" *ngIf="contact$">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Given Name</th>
+                        <th>Family Name</th>
+                        <th>Birth Date</th>
+                        <th>Mobile Number</th>                        
+                        <th>Label</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of contact$ | contactFilter : selectedLabel | async">
+                        <td>{{ contact.id }}</td>
+                        <td>{{ contact.givenName }}</td>
+                        <td>{{ contact.familyName }}</td>
+                        <td>{{ contact.birthDate }}</td>
+                        <td>{{ contact.mobileNumber }}</td>
+                        <td>{{ contact.label.text }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-warning" (click)="update(contact)" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
+                            &nbsp;|&nbsp;
+                            <button class="btn btn-sm btn-outline-danger" (click)="delete(contact)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+    </div>
+</div>
+
+<app-add-contact [labels]="label$ | async" (addContact)="addContact($event)"></app-add-contact>
+<app-update-contact [labels]="label$ | async" [existingContact]="existingContact" (updateContact)="updateContact($event)"></app-update-contact>

@@ -1,0 +1,89 @@
+<!-- Add Modal -->
+<div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+            </div>
+
+            <form class="row g-3 needs-validation" [formGroup]="updateForm" novalidate>
+
+                <input formControlName="id" type="hidden">
+
+                <div class="modal-body">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input formControlName="givenName" type="text" class="form-control" id="givenName" aria-label="Given Name" [ngClass]="{'is-invalid': updateForm.get('givenName')?.invalid && (updateForm.get('givenName')?.dirty || updateForm.get('givenName')?.touched), 'is-valid': updateForm.get('givenName')?.valid && (updateForm.get('givenName')?.dirty || updateForm.get('givenName')?.touched)}">
+                                    <label for="givenName">Given Name</label>
+                                    <div class="valid-feedback" *ngIf="updateForm.get('givenName')?.valid && (updateForm.get('givenName')?.dirty || updateForm.get('givenName')?.touched)">Valid Input</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('givenName')?.getError('minlength')">The field 'given name' has length of {{updateForm.get('givenName')?.getError('minlength')['actualLength']}} which below the minimum length of {{updateForm.get('givenName')?.getError('minlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('givenName')?.getError('maxlength')">The field 'given name' has length of {{updateForm.get('givenName')?.getError('maxlength')['actualLength']}} which exceeds the maximum length of {{updateForm.get('givenName')?.getError('maxlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('givenName')?.getError('required') && (updateForm.get('givenName')?.dirty || updateForm.get('givenName')?.touched)">The field 'given name' is required.</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input formControlName="familyName" type="text" class="form-control" id="familyName" aria-label="Family Name" [ngClass]="{'is-invalid': updateForm.get('familyName')?.invalid && (updateForm.get('familyName')?.dirty || updateForm.get('familyName')?.touched), 'is-valid': updateForm.get('familyName')?.valid && (updateForm.get('familyName')?.dirty || updateForm.get('familyName')?.touched)}">
+                                    <label for="familyName">Family Name</label>
+                                    <div class="valid-feedback" *ngIf="updateForm.get('familyName')?.valid && (updateForm.get('familyName')?.dirty || updateForm.get('familyName')?.touched)">Valid Input</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('familyName')?.getError('minlength')">The field 'family name' has length of {{updateForm.get('familyName')?.getError('minlength')['actualLength']}} which below the minimum length of {{updateForm.get('familyName')?.getError('minlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('familyName')?.getError('maxlength')">The field 'family name' has length of {{updateForm.get('familyName')?.getError('maxlength')['actualLength']}} which exceeds the maximum length of {{updateForm.get('familyName')?.getError('maxlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('familyName')?.getError('required') && (updateForm.get('familyName')?.dirty || updateForm.get('familyName')?.touched)">The field 'family name' is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input formControlName="mobileNumber" type="text" class="form-control" id="mobileNumber" aria-label="Mobile Number" [ngClass]="{'is-invalid': updateForm.get('mobileNumber')?.invalid && (updateForm.get('mobileNumber')?.dirty || updateForm.get('mobileNumber')?.touched), 'is-valid': updateForm.get('mobileNumber')?.valid && (updateForm.get('mobileNumber')?.dirty || updateForm.get('mobileNumber')?.touched)}">
+                                    <label for="mobileNumber">Mobile Number</label>
+                                    <div class="valid-feedback" *ngIf="updateForm.get('mobileNumber')?.valid && (updateForm.get('mobileNumber')?.dirty || updateForm.get('mobileNumber')?.touched)">Valid Input</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('mobileNumber')?.getError('maxlength')">The field 'mobileNumber' has length of {{updateForm.get('mobileNumber')?.getError('maxlength')['actualLength']}} which exceeds the maximum length of {{updateForm.get('mobileNumber')?.getError('maxlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('mobileNumber')?.getError('invalidFormat') && !updateForm.get('mobileNumber')?.getError('required') && (updateForm.get('mobileNumber')?.dirty || updateForm.get('mobileNumber')?.touched)">The field 'mobile number' has invalid format.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('mobileNumber')?.getError('required') && (updateForm.get('mobileNumber')?.dirty || updateForm.get('mobileNumber')?.touched)">The field 'mobile number' is required.</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input formControlName="birthDate" type="date" class="form-control" id="birthDate" aria-label="Birth Date" [ngClass]="{'is-invalid': updateForm.get('birthDate')?.invalid && (updateForm.get('birthDate')?.dirty || updateForm.get('birthDate')?.touched), 'is-valid': updateForm.get('birthDate')?.valid && (updateForm.get('birthDate')?.dirty || updateForm.get('birthDate')?.touched)}">
+                                    <label for="birthDate">Birth Date</label>
+                                    <div class="valid-feedback" *ngIf="updateForm.get('birthDate')?.valid && (updateForm.get('birthDate')?.dirty || updateForm.get('birthDate')?.touched)">Valid Input</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('birthDate')?.getError('maxlength')">The field 'birth date' has length of {{updateForm.get('birthDate')?.getError('maxlength')['actualLength']}} which exceeds the maximum length of {{updateForm.get('birthDate')?.getError('maxlength')['requiredLength']}}.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input list="datalistOptions" formControlName="label" type="text" class="form-control" id="label" aria-label="Label" [ngClass]="{'is-invalid': updateForm.get('label')?.invalid && (updateForm.get('label')?.dirty || updateForm.get('label')?.touched), 'is-valid': updateForm.get('label')?.valid && (updateForm.get('label')?.dirty || updateForm.get('label')?.touched)}">
+                                    <datalist id="datalistOptions">
+                                        <option *ngFor="let label of labels" [value]="label.text">
+                                      </datalist>
+                                    <label for="label">Label</label>
+                                    <div class="valid-feedback" *ngIf="updateForm.get('label')?.valid && (updateForm.get('label')?.dirty || updateForm.get('label')?.touched)">Valid Input</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('label')?.getError('minlength')">The field 'label' has length of {{updateForm.get('label')?.getError('minlength')['actualLength']}} which below the minimum length of {{updateForm.get('label')?.getError('minlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('label')?.getError('maxlength')">The field 'label' has length of {{updateForm.get('label')?.getError('maxlength')['actualLength']}} which exceeds the maximum length of {{updateForm.get('label')?.getError('maxlength')['requiredLength']}}.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('label')?.getError('invalidFormat') && (updateForm.get('label')?.dirty || updateForm.get('label')?.touched)">The field 'label' has invalid format.</div>
+                                    <div class="invalid-feedback" *ngIf="updateForm.get('label')?.getError('required') && (updateForm.get('label')?.dirty || updateForm.get('label')?.touched)">The field 'label' is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+                    <button type="button" class="btn btn-primary" [disabled]="!updateForm.valid" (click)="save()">Save Changes</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
