@@ -5,8 +5,6 @@ namespace phone_book_app.Server.Models;
 
 public partial class Contact : BaseEntity
 {
-    public int Id { get; set; }
-
     public string GivenName { get; set; } = null!;
 
     public string FamilyName { get; set; } = null!;

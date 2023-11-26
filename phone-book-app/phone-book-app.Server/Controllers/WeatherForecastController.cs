@@ -1,8 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using phone_book_app.Server.Models;
+using phone_book_app.Server.Policies;
 
 namespace phone_book_app.Server.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
+    [EnableCors(ControllerPolicy.Cors)]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {

@@ -1,4 +1,4 @@
-namespace phone_book_app.Server
+namespace phone_book_app.Server.Models
 {
     public class WeatherForecast
     {
