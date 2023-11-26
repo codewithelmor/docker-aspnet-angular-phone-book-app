@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phone-book-app.Server", "phone-book-app.Server\phone-book-app.Server.csproj", "{86AEA704-89DF-46E5-BF29-511C889E2CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phone-book-app.Server", "phone-book-app.Server\phone-book-app.Server.csproj", "{86AEA704-89DF-46E5-BF29-511C889E2CAD}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "phone-book-app.client", "phone-book-app.client\phone-book-app.client.esproj", "{1A6E4DCB-97B2-4944-9562-10936A8C0A90}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "phone-book-app.database", "phone-book-app.database\phone-book-app.database.sqlproj", "{982F4A75-A953-4A9F-90AF-BA65AF58F86D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,12 @@ Global
 		{1A6E4DCB-97B2-4944-9562-10936A8C0A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A6E4DCB-97B2-4944-9562-10936A8C0A90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A6E4DCB-97B2-4944-9562-10936A8C0A90}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{982F4A75-A953-4A9F-90AF-BA65AF58F86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{982F4A75-A953-4A9F-90AF-BA65AF58F86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{982F4A75-A953-4A9F-90AF-BA65AF58F86D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{982F4A75-A953-4A9F-90AF-BA65AF58F86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{982F4A75-A953-4A9F-90AF-BA65AF58F86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{982F4A75-A953-4A9F-90AF-BA65AF58F86D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
