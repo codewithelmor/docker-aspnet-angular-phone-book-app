@@ -45,10 +45,7 @@ export class ContactComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    // this.label$ = this.labelService.dropdown();
-    // this.contact$ = this.contactService.list();
-    
+  ngOnInit(): void {    
     this.labelService
       .dropdown()
       .subscribe({
@@ -88,17 +85,7 @@ export class ContactComponent implements OnInit {
       const updatedContacts = [...currentContacts, data];
       this.contactsSubject.next(updatedContacts);
 
-      const currentLabels = this.labelsSubject.value;
-      const labelIndex = findIndex(currentLabels, l => l.value === data.label.value);
-      if (labelIndex >= 0) {
-        const updatedLabels = currentLabels.map(label =>
-          label.value === data.label.value ? data.label : label
-        );
-        this.labelsSubject.next(updatedLabels);
-      } else {
-        const updatedLabels = [...currentLabels, data.label];
-        this.labelsSubject.next(updatedLabels);
-      }
+      this.createOrUpdateLabels(data);
     };
     this.notificationHandlerService.handleCreate(this.contactService.create(model), nextCallback);
   }
@@ -115,17 +102,7 @@ export class ContactComponent implements OnInit {
       );
       this.contactsSubject.next(updatedContacts);
 
-      const currentLabels = this.labelsSubject.value;
-      const labelIndex = findIndex(currentLabels, l => l.value === data.label.value);
-      if (labelIndex >= 0) {
-        const updatedLabels = currentLabels.map(label =>
-          label.value === data.label.value ? data.label : label
-        );
-        this.labelsSubject.next(updatedLabels);
-      } else {
-        const updatedLabels = [...currentLabels, data.label];
-        this.labelsSubject.next(updatedLabels);
-      }
+      this.createOrUpdateLabels(data);
     };
     this.notificationHandlerService.handleUpdate(this.contactService.update(this.existingContact.id, model), nextCallback);
   }
@@ -138,6 +115,20 @@ export class ContactComponent implements OnInit {
       this.contactsSubject.next(currentContacts);
     };
     this.notificationHandlerService.handleDelete(this.contactService.delete(contact.id), nextCallback);
+  }
+
+  private createOrUpdateLabels(data: ContactViewModel) {
+    const currentLabels = this.labelsSubject.value;
+    const labelIndex = findIndex(currentLabels, l => l.value === data.label.value);
+    if (labelIndex >= 0) {
+      const updatedLabels = currentLabels.map(label =>
+        label.value === data.label.value ? data.label : label
+      );
+      this.labelsSubject.next(updatedLabels);
+    } else {
+      const updatedLabels = [...currentLabels, data.label];
+      this.labelsSubject.next(updatedLabels);
+    }
   }
 
 }
