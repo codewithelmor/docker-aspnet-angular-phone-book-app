@@ -21,7 +21,7 @@ namespace phone_book_app.Server.Controllers
         }
 
         [HttpGet("dropdown")]
-        public async Task<IActionResult> Dropdown()
+        public async Task<IActionResult> DropdownAsync()
         {
             try
             {
