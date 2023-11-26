@@ -1,9 +1,13 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using phone_book_app.Server.Data;
+using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Policies;
 using phone_book_app.Server.Services;
 using phone_book_app.Server.Services.Contracts;
+using phone_book_app.Server.Validators;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +22,11 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ILabelService, LabelService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IValidator<ContactInputModel>, ContactInputModelValidator>();
+builder.Services.AddFluentValidationAutoValidation(); // the same old MVC pipeline behavior
+builder.Services.AddFluentValidationClientsideAdapters(); // for client side
 
 builder.Services.AddCors(options =>
 {
