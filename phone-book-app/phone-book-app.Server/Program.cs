@@ -14,6 +14,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<PhoneBookAppContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ILabelService, LabelService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

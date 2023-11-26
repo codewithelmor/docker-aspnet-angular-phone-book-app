@@ -10,22 +10,22 @@ namespace phone_book_app.Server.Controllers
     [AllowAnonymous]
     [EnableCors(ControllerPolicy.Cors)]
     [Route("api/[controller]")]
-    public class LabelController : ControllerBase
+    public class ContactController : ControllerBase
     {
-        private readonly ILabelService _service;
+        private readonly IContactService _service;
 
-        public LabelController(
-            ILabelService service)
+        public ContactController(
+            IContactService service)
         {
             _service = service;
         }
 
-        [HttpGet("dropdown")]
-        public async Task<IActionResult> Dropdown()
+        [HttpGet("")]
+        public async Task<IActionResult> ListAsync()
         {
             try
             {
-                return Ok(await _service.AsSelectList());
+                return Ok(await _service.ListAsync());
             }
             catch (Exception ex)
             {
