@@ -18,7 +18,7 @@ namespace phone_book_app.Server.Mappings
                     {
                         Text = src.Label.Name,
                         Value = src.Label.Id.ToString(),
-                        Disabled = src.Label.IsActive
+                        Disabled = !src.Label.IsActive
                     }));
         }
     }
