@@ -65,6 +65,8 @@
     <Build Include="dbo\Tables\Contact.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="PostScripts\Populate.sql" />
+    <PostDeploy Include="PostScripts\Populate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </PostDeploy>
   </ItemGroup>
 </Project>
