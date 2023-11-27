@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { ContactViewModel } from '../models/view-models/contact.view-model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class NotificationHandlerService {
 
   constructor() { }
 
-  handleCreate(observable: Observable<any>, nextCallback: (data: ContactViewModel) => void) {
+  handleCreate(observable: Observable<any>, nextCallback: (data: any) => void) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -65,7 +64,7 @@ export class NotificationHandlerService {
     });
   }
 
-  handleUpdate(observable: Observable<any>, nextCallback: (data: ContactViewModel) => void) {
+  handleUpdate(observable: Observable<any>, nextCallback: (data: any) => void) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
