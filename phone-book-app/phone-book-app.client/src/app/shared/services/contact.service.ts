@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { ContactInputModel } from '../models/input-models/contact.input-model';
 import { ContactViewModel } from '../models/view-models/contact.view-model';
 
@@ -9,7 +10,8 @@ import { ContactViewModel } from '../models/view-models/contact.view-model';
 })
 export class ContactService {
 
-  baseUrl: string = '/api/contact';
+  apiUrl: string = environment.apiUrl;
+  baseUrl: string = `${this.apiUrl}/api/contact`;
 
   constructor(
     private http: HttpClient) { }

@@ -1,0 +1,13 @@
+services:
+  client:
+    build: ./phone-book-app/phone-book-app.client
+    ports:
+      - 4200:80
+  api:
+    build: ./phone-book-app
+    ports:
+      - 5057:80
+  db:
+    build: ./db
+    ports:
+      - 1433:1433

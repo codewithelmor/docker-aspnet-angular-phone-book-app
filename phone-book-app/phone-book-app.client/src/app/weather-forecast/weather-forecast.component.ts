@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { WeatherForecast } from '../shared/models/weather-forecast';
 
 @Component({
@@ -18,7 +19,7 @@ export class WeatherForecastComponent implements OnInit {
   }
 
   getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
+    this.http.get<WeatherForecast[]>(`${environment.apiUrl}/weatherforecast`).subscribe(
       (result) => {
         this.forecasts = result;
       },

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { SelectListItem } from '../models/select-list-item';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { SelectListItem } from '../models/select-list-item';
 })
 export class LabelService {
   
-  baseUrl: string = '/api/label';
+  apiUrl: string = environment.apiUrl;
+  baseUrl: string = `${this.apiUrl}/api/label`;
 
   constructor(
     private http: HttpClient) { }
