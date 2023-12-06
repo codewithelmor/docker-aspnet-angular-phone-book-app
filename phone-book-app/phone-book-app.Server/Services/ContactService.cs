@@ -3,23 +3,28 @@ using Microsoft.EntityFrameworkCore;
 using phone_book_app.Server.Data;
 using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Models;
+using phone_book_app.Server.Repositories.Contracts;
 using phone_book_app.Server.Services.Contracts;
+using phone_book_app.Server.UnitOfWorks.Contracts;
 using phone_book_app.Server.ViewModels;
 
 namespace phone_book_app.Server.Services
 {
     public class ContactService : IContactService
     {
-        private readonly PhoneBookAppContext _context;
+        private readonly IPhoneBookAppUnitOfWork _unitOfWork;
+        private readonly IContactRepository _repository;
         private readonly IMapper _mapper;
         private readonly ILabelService _labelService;
 
         public ContactService(
-            PhoneBookAppContext context,
+            IPhoneBookAppUnitOfWork unitOfWork,
+            IContactRepository repository,
             IMapper mapper,
             ILabelService labelService)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+            _repository = repository;
             _mapper = mapper;
             _labelService = labelService;
         }
@@ -28,9 +33,8 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var contacts = await _context.Contacts
+                var contacts = await _repository.Find(x => !x.IsDeleted)
                     .Include(x => x.Label)
-                    .Where(x => !x.IsDeleted)
                     .ToListAsync();
 
                 return _mapper.Map<List<ContactViewModel>>(contacts);
@@ -57,8 +61,8 @@ namespace phone_book_app.Server.Services
                 {
                     contact.BirthDate = DateOnly.Parse(model.BirthDate);
                 }
-                contact = (await _context.Contacts.AddAsync(contact)).Entity;
-                await _context.SaveChangesAsync();
+                contact = (await _repository.AddAsync(contact));
+                await _unitOfWork.Commit();
                 return _mapper.Map<ContactViewModel>(contact);
             }
             catch (Exception)
@@ -71,9 +75,9 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var contact = await _context.Contacts
+                var contact = await _repository.Find(x => x.Id == model.GetId())
                     .Include(x => x.Label)
-                    .FirstOrDefaultAsync(x => x.Id == model.GetId());
+                    .FirstOrDefaultAsync();
                 if (contact != null)
                 {
                     contact.GivenName = model.GivenName;
@@ -87,8 +91,8 @@ namespace phone_book_app.Server.Services
                         contact.BirthDate = DateOnly.Parse(model.BirthDate);
                     }
                     contact.UpdatedDate = DateTimeOffset.UtcNow;
-                    contact = (_context.Contacts.Update(contact)).Entity;
-                    await _context.SaveChangesAsync();
+                    contact = (_repository.Update(contact));
+                    await _unitOfWork.Commit();
                     return _mapper.Map<ContactViewModel>(contact);
                 }
                 throw new KeyNotFoundException();
@@ -103,15 +107,15 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var contact = await _context.Contacts
+                var contact = await _repository.Find(x => x.Id == model.GetId())
                     .Include(x => x.Label)
-                    .FirstOrDefaultAsync(x => x.Id == model.GetId());
+                    .FirstOrDefaultAsync();
                 if (contact != null)
                 {
                     contact.IsDeleted = true;
                     contact.DeletedDate = DateTimeOffset.UtcNow;
-                    contact = (_context.Contacts.Update(contact)).Entity;
-                    await _context.SaveChangesAsync();
+                    contact = (_repository.Update(contact));
+                    await _unitOfWork.Commit();
                     return;
                 }
                 throw new KeyNotFoundException();

@@ -3,20 +3,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using phone_book_app.Server.Data;
 using phone_book_app.Server.Models;
+using phone_book_app.Server.Repositories.Contracts;
 using phone_book_app.Server.Services.Contracts;
+using phone_book_app.Server.UnitOfWorks.Contracts;
 
 namespace phone_book_app.Server.Services
 {
     public class LabelService : ILabelService
     {
-        private readonly PhoneBookAppContext _context;
+        private readonly IPhoneBookAppUnitOfWork _unitOfWork;
+        private readonly ILabelRepository _repository;
         private readonly IMapper _mapper;
 
         public LabelService(
-            PhoneBookAppContext context,
+            IPhoneBookAppUnitOfWork unitOfWork,
+            ILabelRepository repository,
             IMapper mapper)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+            _repository = repository;
             _mapper = mapper;
         }
 
@@ -24,9 +29,7 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var labels = await _context.Labels
-                    .Where(x => !x.IsDeleted)
-                    .ToListAsync();
+                var labels = await _repository.Find(x => !x.IsDeleted).ToListAsync();
 
                 var items = _mapper.Map<List<SelectListItem>>(labels);
 
@@ -42,16 +45,16 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var existingLabel = await _context.Labels.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+                var existingLabel = await _repository.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
                 if (existingLabel != null)
                 {
                     return existingLabel;
                 }
                 else
                 {
-                    var newLabel = await _context.Labels.AddAsync(new Label { Name = name, IsActive = true });
-                    await _context.SaveChangesAsync();
-                    return newLabel.Entity;
+                    var newLabel = await _repository.AddAsync(new Label { Name = name, IsActive = true });
+                    await _unitOfWork.Commit();
+                    return newLabel;
                 }
             }
             catch (Exception)
