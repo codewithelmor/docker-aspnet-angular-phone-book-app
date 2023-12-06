@@ -10,7 +10,7 @@ namespace phone_book_app.Server.Controllers
     [ApiController]
     [AllowAnonymous]
     [EnableCors(ControllerPolicy.Cors)]
-    [Route("api/v{v:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ContactController : ControllerBase
     {
         private readonly IContactService _service;
