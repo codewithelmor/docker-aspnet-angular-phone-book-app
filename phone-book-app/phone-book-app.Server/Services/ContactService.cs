@@ -14,19 +14,19 @@ namespace phone_book_app.Server.Services
     {
         private readonly IPhoneBookAppUnitOfWork _unitOfWork;
         private readonly IContactRepository _repository;
-        private readonly IMapper _mapper;
         private readonly ILabelService _labelService;
+        private readonly IMapper _mapper;
 
         public ContactService(
             IPhoneBookAppUnitOfWork unitOfWork,
             IContactRepository repository,
-            IMapper mapper,
-            ILabelService labelService)
+            ILabelService labelService,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _repository = repository;
-            _mapper = mapper;
             _labelService = labelService;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<ContactViewModel>> ListAsync()
