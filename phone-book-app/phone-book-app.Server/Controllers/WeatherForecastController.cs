@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using phone_book_app.Server.Policies;
 namespace phone_book_app.Server.Controllers
 {
     [ApiController]
+    [ApiVersionNeutral]
     [AllowAnonymous]
     [EnableCors(ControllerPolicy.Cors)]
     [Route("[controller]")]

@@ -9,7 +9,7 @@ namespace phone_book_app.Server.Controllers
     [ApiController]
     [AllowAnonymous]
     [EnableCors(ControllerPolicy.Cors)]
-    [Route("api/[controller]")]
+    [Route("api/v{v:apiVersion}/[controller]")]
     public class LabelController : ControllerBase
     {
         private readonly ILabelService _service;
