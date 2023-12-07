@@ -23,14 +23,7 @@ namespace phone_book_app.Server.Controllers
         [HttpGet("dropdown")]
         public async Task<IActionResult> DropdownAsync()
         {
-            try
-            {
-                return Ok(await _service.AsSelectListAsync());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _service.AsSelectListAsync());
         }
     }
 }

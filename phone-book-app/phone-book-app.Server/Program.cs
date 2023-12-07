@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using phone_book_app.Server.Data;
+using phone_book_app.Server.ExceptionHandlers;
 using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Policies;
 using phone_book_app.Server.Repositories;
@@ -29,6 +30,8 @@ builder.Services.AddScoped<ILabelRepository, LabelRepository>();
 
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ILabelService, LabelService>();
+
+builder.Services.AddExceptionHandler<AppExceptionHandler>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -82,5 +85,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
+app.UseExceptionHandler(_ => { });
 
 app.Run();
