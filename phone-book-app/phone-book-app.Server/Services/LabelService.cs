@@ -29,7 +29,7 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var labels = await _repository.Find(x => !x.IsDeleted).ToListAsync();
+                var labels = await _repository.FindAsync(x => !x.IsDeleted);
 
                 var items = _mapper.Map<List<SelectListItem>>(labels);
 

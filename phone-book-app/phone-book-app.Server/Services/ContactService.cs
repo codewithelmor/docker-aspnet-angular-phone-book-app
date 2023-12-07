@@ -33,9 +33,7 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var contacts = await _repository.Find(x => !x.IsDeleted)
-                    .Include(x => x.Label)
-                    .ToListAsync();
+                var contacts = await _repository.FindAsync(x => !x.IsDeleted);
 
                 return _mapper.Map<List<ContactViewModel>>(contacts);
             }
@@ -75,9 +73,7 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var contact = await _repository.Find(x => x.Id == model.GetId())
-                    .Include(x => x.Label)
-                    .FirstOrDefaultAsync();
+                var contact = await _repository.FirstOrDefaultAsync(x => x.Id == model.GetId());
                 if (contact != null)
                 {
                     contact.GivenName = model.GivenName;
@@ -103,20 +99,18 @@ namespace phone_book_app.Server.Services
             }
         }
 
-        public async Task DeleteAsync(BaseInputModel model)
+        public async Task<Contact> DeleteAsync(BaseInputModel model)
         {
             try
             {
-                var contact = await _repository.Find(x => x.Id == model.GetId())
-                    .Include(x => x.Label)
-                    .FirstOrDefaultAsync();
+                var contact = await _repository.FirstOrDefaultAsync(x => x.Id == model.GetId());
                 if (contact != null)
                 {
                     contact.IsDeleted = true;
                     contact.DeletedDate = DateTimeOffset.UtcNow;
                     contact = (_repository.Update(contact));
                     await _unitOfWork.Commit();
-                    return;
+                    return contact;
                 }
                 throw new KeyNotFoundException();
             }

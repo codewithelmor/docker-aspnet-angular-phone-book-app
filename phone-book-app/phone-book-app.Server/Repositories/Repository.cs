@@ -45,17 +45,17 @@ namespace phone_book_app.Server.Repositories
             return Entities;
         }
 
-        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return Entities.Where(predicate);
+            return await Entities.Where(predicate).ToListAsync();
         }
 
-        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return Entities.FirstOrDefault(predicate);
         }
 
-        public Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return Entities.FirstOrDefaultAsync(predicate);
         }
@@ -84,8 +84,8 @@ namespace phone_book_app.Server.Repositories
 
         public TEntity Update(TEntity entity)
         {
-            Entities.Update(entity);
-            return entity;
+            var result = Entities.Update(entity);
+            return result.Entity;
         }
 
         public IEnumerable<TEntity> UpdateRange(IEnumerable<TEntity> entities)

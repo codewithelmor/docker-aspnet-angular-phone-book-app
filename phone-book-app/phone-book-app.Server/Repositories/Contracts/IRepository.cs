@@ -11,7 +11,7 @@ namespace phone_book_app.Server.Repositories.Contracts
         Task<TEntity> GetAsync(dynamic id);
         TEntity Get(dynamic id);
         IQueryable<TEntity> GetAll();
-        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         TEntity Add(TEntity entity);
