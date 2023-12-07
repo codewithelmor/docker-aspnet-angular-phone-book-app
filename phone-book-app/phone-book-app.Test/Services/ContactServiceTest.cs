@@ -8,12 +8,11 @@ using phone_book_app.Server.Repositories.Contracts;
 using phone_book_app.Server.Services;
 using phone_book_app.Server.Services.Contracts;
 using phone_book_app.Server.UnitOfWorks.Contracts;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace phone_book_app.Test.Services
 {
-    public class ContactTest
+    public class ContactServiceTest
     {
         private readonly IPhoneBookAppUnitOfWork _unitOfWorkMock;
         private readonly IContactRepository _repositoryMock;
@@ -42,21 +41,6 @@ namespace phone_book_app.Test.Services
             DeletedDate = null
         };
 
-        private static readonly Contact ContactInputEntity = new()
-        {
-            GivenName = "John",
-            FamilyName = "Doe",
-            BirthDate = DateOnly.Parse("2000-01-01"),
-            MobileNumber = "+639171234567",
-            LabelId = LabelEntity.Id,
-            Label = LabelEntity,
-            IsActive = true,
-            CreatedDate = DateTimeOffset.UtcNow,
-            UpdatedDate = null,
-            IsDeleted = false,
-            DeletedDate = null
-        };
-
         private static readonly Contact ContactOutputEntity = new()
         {
             Id = 3,
@@ -78,7 +62,7 @@ namespace phone_book_app.Test.Services
             ContactOutputEntity
         };
 
-        public ContactTest()
+        public ContactServiceTest()
         {
             _unitOfWorkMock = Substitute.For<IPhoneBookAppUnitOfWork>();
             _repositoryMock = Substitute.For<IContactRepository>();

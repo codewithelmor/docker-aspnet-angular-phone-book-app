@@ -25,7 +25,7 @@ namespace phone_book_app.Server.Services
             _mapper = mapper;
         }
 
-        public async Task<SelectList> AsSelectList()
+        public async Task<SelectList> AsSelectListAsync()
         {
             try
             {

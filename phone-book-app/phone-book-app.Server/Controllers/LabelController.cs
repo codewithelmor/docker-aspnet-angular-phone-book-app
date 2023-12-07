@@ -25,7 +25,7 @@ namespace phone_book_app.Server.Controllers
         {
             try
             {
-                return Ok(await _service.AsSelectList());
+                return Ok(await _service.AsSelectListAsync());
             }
             catch (Exception ex)
             {
