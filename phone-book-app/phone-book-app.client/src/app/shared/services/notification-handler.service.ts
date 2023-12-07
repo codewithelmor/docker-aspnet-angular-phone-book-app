@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { keys } from 'lodash';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -31,14 +32,9 @@ export class NotificationHandlerService {
         observable
           .subscribe({
             next: nextCallback,
-            error: (error) => {
-              // console.error(error);
-
-              swalWithBootstrapButtons.fire({
-                title: "Failed!",
-                text: "Creation process has failed.",
-                icon: "error"
-              });
+            error: (data) => {
+              // console.error(data);
+              this.errorNotification(swalWithBootstrapButtons, data);
             },
             complete: () => {
               // console.info('complete');
@@ -86,14 +82,9 @@ export class NotificationHandlerService {
         observable
           .subscribe({
             next: nextCallback,
-            error: (error) => {
-              // console.error(error);
-
-              swalWithBootstrapButtons.fire({
-                title: "Failed!",
-                text: "Update process has failed.",
-                icon: "error"
-              });
+            error: (data) => {
+              // console.error(data);
+              this.errorNotification(swalWithBootstrapButtons, data);
             },
             complete: () => {
               // console.info('complete');
@@ -141,14 +132,9 @@ export class NotificationHandlerService {
         observable
           .subscribe({
             next: nextCallback,
-            error: (error) => {
-              // console.error(error);
-
-              swalWithBootstrapButtons.fire({
-                title: "Failed!",
-                text: "Deletion process has failed.",
-                icon: "error"
-              });
+            error: (data) => {
+              // console.error(data);
+              this.errorNotification(swalWithBootstrapButtons, data);
             },
             complete: () => {
               // console.info('complete');
@@ -173,5 +159,26 @@ export class NotificationHandlerService {
       }
     });
   }
+
+  private errorNotification(swalWithBootstrapButtons: any, data: any): void {
+    const errorKeys = keys(data.error.errors);
+              
+    let html: string = '';
+    for (let errorKey of errorKeys) {
+      let item: string = '';
+      item = '<ul style="list-style-type: none" class="text-start fs-6">';
+      for(let errorMessage of data.error.errors[errorKey]) {
+        item += `<li>${errorMessage}</li>`
+      }
+      item += '</ul>';
+      html += item;
+    }
+
+    swalWithBootstrapButtons.fire({
+      title: data.error.title,
+      html: html,
+      icon: "error"
+    });
+  }  
 
 }
