@@ -41,3 +41,68 @@ GO
 SELECT SERVERPROPERTY('ServerName') AS ComputerName
 GO
 ```
+
+## xUnit - Unit Test
+
+In **`xUnit`**, the naming convention for test methods is slightly different from other testing frameworks like NUnit or MSTest. xUnit uses a more simplified approach to method naming.
+
+The convention is:
+
+```csharp
+public class ClassNameTests
+{
+    [Fact]
+    public void MethodUnderTest_Scenario_ExpectedResult()
+    {
+        // Arrange
+
+        // Act
+
+        // Assert
+    }
+}
+```
+
+In this convention:
+
+* **`MethodUnderTest`**: This is the name of the method you are testing. Be explicit about what functionality you are testing.
+
+* **`Scenario`**: Describe the scenario or conditions under which the method is being tested. This helps to understand the context of the test.
+
+* **`ExpectedResult`**: Mention the expected outcome of the test. This makes it clear what the expected behavior is.
+
+Here's an example:
+
+```csharp
+public class CalculatorTests
+{
+    [Fact]
+    public void CalculateTotal_WithValidInput_CorrectTotal()
+    {
+        // Arrange
+        var calculator = new Calculator();
+
+        // Act
+        var result = calculator.CalculateTotal(5, 10);
+
+        // Assert
+        Assert.Equal(15, result);
+    }
+}
+```
+
+In this example:
+
+* **`MethodUnderTest`**: CalculateTotal
+* **`Scenario`**: WithValidInput
+* **`ExpectedResult`**: CorrectTotal
+
+This naming convention is similar to other frameworks, but it's adapted for xUnit's attribute-based approach. The **`[Fact]`** attribute indicates that the method is a test. The convention helps in making your test suite more readable and maintainable.
+
+
+
+
+
+
+
+
