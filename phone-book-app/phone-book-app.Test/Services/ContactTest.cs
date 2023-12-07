@@ -93,7 +93,7 @@ namespace phone_book_app.Test.Services
         }
 
         [Fact]
-        public async Task Handle_Should_ReturnContactViewModel_WhenContactInputModelIsValid()
+        public async Task CreateAsync_WithValidContactInputModel_ReturnContactViewModel()
         {
             // Arrange
             _labelServiceMock.CreateLabelIfExisting(ContactInputModel.Label).Returns(LabelEntity);
