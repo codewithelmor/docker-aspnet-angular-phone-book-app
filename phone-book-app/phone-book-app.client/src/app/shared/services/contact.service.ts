@@ -11,7 +11,7 @@ import { ContactViewModel } from '../models/view-models/contact.view-model';
 export class ContactService {
 
   apiUrl: string = environment.apiUrl;
-  baseUrl: string = `${this.apiUrl}/api/contact`;
+  baseUrl: string = `${this.apiUrl}/api/v1/contact`;
 
   constructor(
     private http: HttpClient) { }

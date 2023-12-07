@@ -10,7 +10,7 @@ import { SelectListItem } from '../models/select-list-item';
 export class LabelService {
   
   apiUrl: string = environment.apiUrl;
-  baseUrl: string = `${this.apiUrl}/api/label`;
+  baseUrl: string = `${this.apiUrl}/api/v1/label`;
 
   constructor(
     private http: HttpClient) { }
