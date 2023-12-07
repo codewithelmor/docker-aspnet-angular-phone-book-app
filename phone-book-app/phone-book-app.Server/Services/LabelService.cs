@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using phone_book_app.Server.Data;
 using phone_book_app.Server.Models;
 using phone_book_app.Server.Repositories.Contracts;
 using phone_book_app.Server.Services.Contracts;

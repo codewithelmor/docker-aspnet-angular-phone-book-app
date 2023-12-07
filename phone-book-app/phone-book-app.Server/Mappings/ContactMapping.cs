@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Models;
 using phone_book_app.Server.ViewModels;
 

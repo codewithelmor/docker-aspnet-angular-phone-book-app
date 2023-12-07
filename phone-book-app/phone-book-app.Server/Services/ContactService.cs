@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using phone_book_app.Server.Data;
 using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Models;
 using phone_book_app.Server.Repositories.Contracts;

@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using NSubstitute;
-using phone_book_app.Server.InputModels;
 using phone_book_app.Server.Mappings;
 using phone_book_app.Server.Models;
 using phone_book_app.Server.Repositories.Contracts;
 using phone_book_app.Server.Services;
-using phone_book_app.Server.Services.Contracts;
 using phone_book_app.Server.UnitOfWorks.Contracts;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace phone_book_app.Test.Services

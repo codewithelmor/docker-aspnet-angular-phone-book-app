@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace phone_book_app.Server.Models;
+﻿namespace phone_book_app.Server.Models;
 
 public partial class Label : BaseEntity
 {
