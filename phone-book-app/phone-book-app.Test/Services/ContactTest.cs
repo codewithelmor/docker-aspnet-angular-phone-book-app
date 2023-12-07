@@ -117,7 +117,7 @@ namespace phone_book_app.Test.Services
         public async Task CreateAsync_WithValidContactInputModel_ReturnContactViewModel()
         {
             // Arrange
-            _labelServiceMock.CreateLabelIfExisting(ContactInputModel.Label).Returns(LabelEntity);
+            _labelServiceMock.CreateLabelIfExistingAsync(ContactInputModel.Label).Returns(LabelEntity);
             _repositoryMock.AddAsync(Arg.Any<Contact>()).Returns(ContactOutputEntity);
 
             // Act
@@ -136,7 +136,7 @@ namespace phone_book_app.Test.Services
         public async Task UpdateAsync_WithValidContactInputModel_ReturnContactViewModel()
         {
             // Arrange
-            _labelServiceMock.CreateLabelIfExisting(ContactInputModel.Label).Returns(LabelEntity);
+            _labelServiceMock.CreateLabelIfExistingAsync(ContactInputModel.Label).Returns(LabelEntity);
             _repositoryMock.FirstOrDefaultAsync(Arg.Any<Expression<Func<Contact, bool>>>()).Returns(ContactOutputEntity);
             _repositoryMock.Update(Arg.Any<Contact>()).Returns(ContactOutputEntity);
 

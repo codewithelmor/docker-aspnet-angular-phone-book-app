@@ -41,7 +41,7 @@ namespace phone_book_app.Server.Services
             }
         }
 
-        public async Task<Label> CreateLabelIfExisting(string name)
+        public async Task<Label> CreateLabelIfExistingAsync(string name)
         {
             try
             {

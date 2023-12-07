@@ -47,7 +47,7 @@ namespace phone_book_app.Server.Services
         {
             try
             {
-                var label = await _labelService.CreateLabelIfExisting(model.Label);
+                var label = await _labelService.CreateLabelIfExistingAsync(model.Label);
                 var contact = new Contact();
                 contact.GivenName = model.GivenName;
                 contact.FamilyName = model.FamilyName;
@@ -79,7 +79,7 @@ namespace phone_book_app.Server.Services
                     contact.GivenName = model.GivenName;
                     contact.FamilyName = model.FamilyName;
                     contact.MobileNumber = model.MobileNumber;
-                    var label = await _labelService.CreateLabelIfExisting(model.Label);
+                    var label = await _labelService.CreateLabelIfExistingAsync(model.Label);
                     contact.LabelId = label.Id;
                     contact.Label = label;
                     if (!string.IsNullOrWhiteSpace(model.BirthDate))

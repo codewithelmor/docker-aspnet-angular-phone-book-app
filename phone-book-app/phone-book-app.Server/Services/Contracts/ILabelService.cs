@@ -6,6 +6,6 @@ namespace phone_book_app.Server.Services.Contracts
     public interface ILabelService
     {
         Task<SelectList> AsSelectList();
-        Task<Label> CreateLabelIfExisting(string name);
+        Task<Label> CreateLabelIfExistingAsync(string name);
     }
 }
